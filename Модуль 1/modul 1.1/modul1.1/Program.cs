@@ -1,0 +1,89 @@
+﻿using System;
+
+namespace modul1._1
+{
+    class Program
+    {
+        static void Main()
+        {
+            // Заголовок программы
+            Console.WriteLine("   КОНВЕРТЕР ТЕМПЕРАТУРЫ");
+            Console.WriteLine();
+
+            // Бесконечный цикл позволяет выполнять несколько преобразований
+            // до тех пор, пока пользователь не выберет пункт "Выход".
+            while (true)
+            {
+                // Вывод меню программы
+                Console.WriteLine("Выберите необходимое действие:");
+                Console.WriteLine("1 - Перевести Цельсии в Фаренгейты");
+                Console.WriteLine("2 - Перевести Фаренгейты в Цельсии");
+                Console.WriteLine("0 - Выход");
+                Console.Write("Ваш выбор: ");
+
+                string choice = Console.ReadLine();
+
+                Console.WriteLine();
+
+                // Проверяем выбранный пользователем пункт
+                if (choice == "0")
+                {
+                    Console.WriteLine("Программа завершена.");
+                    break;
+                }
+                else if (choice == "1")
+                {
+                    // Перевод температуры из Цельсия в Фаренгейт
+                    Console.Write("Введите температуру в градусах Цельсия: ");
+
+                    // Пытаемся преобразовать введённое значение в число
+                    if (double.TryParse(Console.ReadLine(), out double celsius))
+                    {
+                        // Формула перевода:
+                        // F = C * 9 / 5 + 32
+                        double fahrenheit = celsius * 9 / 5 + 32;
+
+                        Console.WriteLine();
+                        Console.WriteLine($"{celsius:F2} °C = {fahrenheit:F2} °F");
+                    }
+                    else
+                    {
+                        // Если пользователь ввёл не число
+                        Console.WriteLine("Ошибка: необходимо ввести число.");
+                    }
+                }
+                else if (choice == "2")
+                {
+                    // Перевод температуры из Фаренгейта в Цельсий
+                    Console.Write("Введите температуру в градусах Фаренгейта: ");
+
+                    // Пытаемся преобразовать введённое значение в число
+                    if (double.TryParse(Console.ReadLine(), out double fahrenheit))
+                    {
+                        // Формула перевода:
+                        // C = (F - 32) * 5 / 9
+                        double celsius = (fahrenheit - 32) * 5 / 9;
+
+                        Console.WriteLine();
+                        Console.WriteLine($"{fahrenheit:F2} °F = {celsius:F2} °C");
+                    }
+                    else
+                    {
+                        // Если пользователь ввёл не число
+                        Console.WriteLine("Ошибка: необходимо ввести число.");
+                    }
+                }
+                else
+                {
+                    // Обработка неправильного пункта меню
+                    Console.WriteLine("Ошибка: такого пункта меню нет.");
+                }
+
+                // Пустая строка для удобства отображения результатов
+                Console.WriteLine();
+                Console.WriteLine("----------------------------------------------");
+                Console.WriteLine();
+            }
+        }
+    }
+}

@@ -1,0 +1,68 @@
+﻿using System;
+class Program
+{
+    static void Main()
+    {
+        Console.Write("Введите размер квадратной матрицы: ");
+        int n = int.Parse(Console.ReadLine());
+        int[,] matrix = new int[n, n];
+        Random random = new Random();
+        // Заполняем матрицу случайными числами от -50 до 50
+        for (int i = 0; i < n; i++)
+        {
+            for (int j = 0; j < n; j++)
+            {
+                matrix[i, j] = random.Next(-50, 51);
+            }
+        }
+        Console.WriteLine();
+        Console.WriteLine("Исходная матрица:");
+        for (int i = 0; i < n; i++)
+        {
+            for (int j = 0; j < n; j++)
+            {
+                Console.Write($"{matrix[i, j],5}");
+            }
+            Console.WriteLine();
+        }
+        // Сортируем строки по сумме их элементов
+        for (int i = 0; i < n - 1; i++)
+        {
+            for (int k = i + 1; k < n; k++)
+            {
+                int sum1 = 0;
+                int sum2 = 0;
+
+                for (int j = 0; j < n; j++)
+                {
+                    sum1 += matrix[i, j];
+                    sum2 += matrix[k, j];
+                }
+
+                if (sum1 > sum2)
+                {
+                    // Меняем строки местами
+                    for (int j = 0; j < n; j++)
+                    {
+                        int temp = matrix[i, j];
+                        matrix[i, j] = matrix[k, j];
+                        matrix[k, j] = temp;
+                    }
+                }
+            }
+        }
+
+        Console.WriteLine();
+        Console.WriteLine("Матрица после сортировки:");
+        for (int i = 0; i < n; i++)
+        {
+            int sum = 0;
+            for (int j = 0; j < n; j++)
+            {
+                Console.Write($"{matrix[i, j],5}");
+                sum += matrix[i, j];
+            }
+            Console.WriteLine($"   | Сумма: {sum}");
+        }
+    }
+}
